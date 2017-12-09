@@ -60,7 +60,3 @@ class Moviedata:
         if len(ratings) == 0:
             return 0
         return max(ratings.astype(float))
-
-data = Moviedata()
-print(data.actor_movie('Samuel L. Jackson'))
-print(data.movie_budget('Pulp Fiction(1994)'))
