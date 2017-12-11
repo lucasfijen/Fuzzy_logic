@@ -10,6 +10,7 @@ class Moviedata:
         self.specials = np.genfromtxt('database/special-effects-companies.csv',
                                       dtype='str', delimiter=',')
         self.ratings = np.genfromtxt('database/ratings.csv', dtype='str', delimiter=',')
+
     def composer_movie(self, composer):
         """Returns a numpy array with movies with music from composer"""
         return self.composers[self.composers[:, 0] == composer, 1]
