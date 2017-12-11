@@ -2,10 +2,21 @@ import numpy as np
 import data as d
 
 class Datainteraction:
+    """ Interaction class for data between validation and training"""
     def __init__(self):
         """ Inits the datainteraction class, makes a validation and training set """
-        self.val = d.Moviedata()
-        self.train = d.Moviedata()
+        self.val = d.Moviedata('valcomposers',
+                               'valdirectors',
+                               'valactors',
+                               'valbusiness',
+                               'valspecial-effects-companies',
+                               'valratings')
+        self.train = d.Moviedata('composers',
+                                 'directors',
+                                 'actors',
+                                 'business',
+                                 'special-effects-companies',
+                                 'ratings')
         self.errorvalue = -1
 
     def actor_values(self, movie):
@@ -105,4 +116,4 @@ class Datainteraction:
         return self.val.movie_budget(movie)
 
 datainter = Datainteraction()
-print(datainter.get_budget('Interstellar(2014)'))
+print(datainter.director_values('Harry(2018)'))

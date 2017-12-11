@@ -2,14 +2,14 @@ import numpy as np
 
 class Moviedata:
     """Creates a database object, with functions to get information"""
-    def __init__(self):
-        self.composers = np.genfromtxt('database/composers.csv', dtype='str', delimiter=',')
-        self.directors = np.genfromtxt('database/directors.csv', dtype='str', delimiter=',')
-        self.actors = np.genfromtxt('database/actors.csv', dtype='str', delimiter=',')
-        self.business = np.genfromtxt('database/business.csv', dtype='str', delimiter=',')
-        self.specials = np.genfromtxt('database/special-effects-companies.csv',
+    def __init__(self, compo, direct, actor, busin, special, rat):
+        self.composers = np.genfromtxt('database/' + compo + '.csv', dtype='str', delimiter=',')
+        self.directors = np.genfromtxt('database/' + direct + '.csv', dtype='str', delimiter=',')
+        self.actors = np.genfromtxt('database/' + actor + '.csv', dtype='str', delimiter=',')
+        self.business = np.genfromtxt('database/' + busin + '.csv', dtype='str', delimiter=',')
+        self.specials = np.genfromtxt('database/' + special + '.csv',
                                       dtype='str', delimiter=',')
-        self.ratings = np.genfromtxt('database/ratings.csv', dtype='str', delimiter=',')
+        self.ratings = np.genfromtxt('database/' + rat + '.csv', dtype='str', delimiter=',')
 
     def composer_movie(self, composer):
         """Returns a numpy array with movies with music from composer"""
