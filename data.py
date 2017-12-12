@@ -1,3 +1,8 @@
+"""
+This database API has been written by:
+Lucas Fijen and Arie Soeteman
+As part of an assignment for fuzzy logic at the University of Amsterdam
+"""
 import numpy as np
 
 class Moviedata:

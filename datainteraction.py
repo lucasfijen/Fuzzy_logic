@@ -1,4 +1,10 @@
-#import numpy as np
+"""
+This database interaction function has been written by:
+Lucas Fijen and Arie Soeteman
+As part of an assignment for fuzzy logic at the University of Amsterdam
+"""
+
+
 import data as d
 
 class Datainteraction:
