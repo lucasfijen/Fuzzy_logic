@@ -40,7 +40,7 @@ class Datainteraction:
             return 0, self.errorvalue
         amount /= length
         rating /= length
-        return amount, rating
+        return rating, amount
 
     def special_values(self, movie):
         """ returns average amount of movies done by special effect studio,
@@ -63,7 +63,7 @@ class Datainteraction:
             return 0, self.errorvalue
         amount /= length
         rating /= length
-        return amount, rating
+        return rating, amount
 
     def director_values(self, movie):
         """ returns average amount of movies created by director
@@ -86,7 +86,7 @@ class Datainteraction:
             return 0, self.errorvalue
         amount /= len(directors)
         rating /= len(directors)
-        return amount, rating
+        return rating, amount
 
     def composer_values(self, movie):
         """ returns average amount of movies with music created by composer
@@ -109,7 +109,7 @@ class Datainteraction:
             return 0, self.errorvalue
         amount /= len(composers)
         rating /= len(composers)
-        return amount, rating
+        return rating, amount
 
     def get_budget(self, movie):
         """ returns budget of a movie """
