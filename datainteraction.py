@@ -112,8 +112,9 @@ class Datainteraction:
         return rating, amount
 
     def get_budget(self, movie):
-        """ returns budget of a movie """
-        return self.val.movie_budget(movie)
+        """ returns budget of a movie in milions"""
+        budget = self.val.movie_budget(movie)
+        return budget / 1000000
 
 #datainter = Datainteraction()
 #print(datainter.director_values('Harry(2018)'))
