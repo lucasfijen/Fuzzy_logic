@@ -1,4 +1,4 @@
-import numpy as np
+#import numpy as np
 import data as d
 
 class Datainteraction:
@@ -115,5 +115,5 @@ class Datainteraction:
         """ returns budget of a movie """
         return self.val.movie_budget(movie)
 
-datainter = Datainteraction()
-print(datainter.director_values('Harry(2018)'))
+#datainter = Datainteraction()
+#print(datainter.director_values('Harry(2018)'))
