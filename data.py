@@ -5,16 +5,25 @@ As part of an assignment for fuzzy logic at the University of Amsterdam
 """
 import numpy as np
 
+
 class Moviedata:
     """Creates a database object, with functions to get information"""
     def __init__(self, compo, direct, actor, busin, special, rat):
-        self.composers = np.genfromtxt('database/' + compo + '.csv', dtype='str', delimiter=',')
-        self.directors = np.genfromtxt('database/' + direct + '.csv', dtype='str', delimiter=',')
-        self.actors = np.genfromtxt('database/' + actor + '.csv', dtype='str', delimiter=',')
-        self.business = np.genfromtxt('database/' + busin + '.csv', dtype='str', delimiter=',')
+        splitchar = '%'
+        self.composers = np.genfromtxt('database/' + compo + '.csv',dtype=None, delimiter=splitchar)
+        self.directors = np.genfromtxt('database/' + direct + '.csv', dtype=None, delimiter=splitchar)
+        self.actors = np.genfromtxt('database/' + actor + '.csv', dtype =None, delimiter=splitchar)
+        self.business = np.genfromtxt('database/' + busin + '.csv', dtype='S20', delimiter=splitchar)
         self.specials = np.genfromtxt('database/' + special + '.csv',
-                                      dtype='str', delimiter=',')
-        self.ratings = np.genfromtxt('database/' + rat + '.csv', dtype='str', delimiter=',')
+                                      dtype=None, delimiter=splitchar)
+        self.ratings = np.genfromtxt('database/' + rat + '.csv', dtype='S20', delimiter=splitchar)
+
+        self.composers = np.char.decode(self.composers)
+        self.directors = np.char.decode(self.directors)
+        self.actors = np.char.decode(self.actors)
+        self.business = np.chararray.decode(self.business)
+        self.specials = np.char.decode(self.specials)
+        self.ratings = np.char.decode(self.ratings)
 
     def composer_movie(self, composer):
         """Returns a numpy array with movies with music from composer"""
@@ -66,3 +75,14 @@ class Moviedata:
         if len(ratings) == 0:
             return 0
         return max(ratings.astype(float))
+
+    def get_movies(self):
+        """ returns a list of all movies in dataset movies """
+        return self.ratings[:, 0].tolist()
+
+print(Moviedata('valcomposers',
+                       'valdirectors',
+                       'valactors',
+                       'valbusiness',
+                       'valspecial-effects-companies',
+                       'valratings').movie_composer('The Polar Express'))
