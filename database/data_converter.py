@@ -4,6 +4,7 @@ import csv
 from random import shuffle
 
 def load_tmdb_movies(path):
+    """ Function that came with the database, found on Kaggle.com """
     df = pd.read_csv(path)
     df['release_date'] = pd.to_datetime(df['release_date']).apply(lambda x: x.date())
     json_columns = ['genres', 'keywords', 'production_countries', 'production_companies', 'spoken_languages']
@@ -12,6 +13,7 @@ def load_tmdb_movies(path):
     return df
 
 def load_tmdb_credits(path):
+    """ Function that came with the database, found on Kaggle.com """
     df = pd.read_csv(path)
     json_columns = ['cast', 'crew']
     for column in json_columns:
@@ -19,6 +21,10 @@ def load_tmdb_credits(path):
     return df
 
 def split_train_val(credits, movie, ratio):
+    """ This function splits the database into two sets, the training and
+        validation set uses indices for this. So there is no information loss,
+        each time this function is called a new random split is performed
+        with the given ratio. """
     indexes = [i for i in range(len(credits))]
     shuffle(indexes)
     splitval = int(ratio * len(indexes))
@@ -27,6 +33,8 @@ def split_train_val(credits, movie, ratio):
     return movie.iloc[trainind], credits.iloc[trainind], movie.iloc[valind], credits.iloc[valind]
 
 def write_credits_csv(actfile, dirfile, comfile, specialfile, creditfile):
+    """ Converts the credits database into the csv style that is beeing used
+        in the rest of the code. """
     actfile = open(actfile, 'w')
     dirfile = open(dirfile, 'w')
     comfile = open(comfile, 'w')
@@ -56,6 +64,8 @@ def write_credits_csv(actfile, dirfile, comfile, specialfile, creditfile):
     specialfile.close()
 
 def write_movie_csv(busfile, ratfile, moviefile):
+    """ Converts the movie database into the csv style that is beeing used
+        in the rest of the code. """
     busfile = open(busfile, 'w')
     ratfile = open(ratfile, 'w')
     for i in moviefile.index.values:
@@ -68,6 +78,7 @@ def write_movie_csv(busfile, ratfile, moviefile):
 credits = load_tmdb_credits('tmdb_5000_credits.csv')
 movie = load_tmdb_movies('tmdb_5000_movies.csv')
 
+# Creates the training and validation set with a ratio of 0.8
 trainmovie, traincredits, valmovie, valcredits = split_train_val(credits, movie, 0.8)
 write_credits_csv('actors.csv', 'directors.csv', 'composers.csv', 'special-effects-companies.csv', traincredits)
 write_movie_csv('business.csv', 'ratings.csv',  trainmovie)

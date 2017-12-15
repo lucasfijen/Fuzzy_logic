@@ -9,6 +9,8 @@ import numpy as np
 class Moviedata:
     """Creates a database object, with functions to get information"""
     def __init__(self, compo, direct, actor, busin, special, rat):
+        """ Initialises the Moviedata object. Reads the csv's and stores
+            them. """
         splitchar = '%'
         self.composers = np.genfromtxt('database/' + compo + '.csv',
                                        dtype=None, delimiter=splitchar)

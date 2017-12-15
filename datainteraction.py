@@ -10,7 +10,8 @@ import data as d
 class Datainteraction:
     """ Interaction class for data between validation and training"""
     def __init__(self):
-        """ Inits the datainteraction class, makes a validation and training set """
+        """ Inits the datainteraction class, makes a validation and training
+            set """
         self.val = d.Moviedata('valcomposers',
                                'valdirectors',
                                'valactors',
