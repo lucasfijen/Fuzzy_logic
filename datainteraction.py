@@ -122,5 +122,9 @@ class Datainteraction:
         budget = self.val.movie_budget(movie)
         return budget / 1000000
 
+    def get_all_movies(self):
+        """ returns all movies that appear in the validation data """
+        return self.val.get_movies()
+
 #datainter = Datainteraction()
 #print(datainter.director_values('Harry(2018)'))

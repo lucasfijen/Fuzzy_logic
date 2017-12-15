@@ -10,13 +10,17 @@ class Moviedata:
     """Creates a database object, with functions to get information"""
     def __init__(self, compo, direct, actor, busin, special, rat):
         splitchar = '%'
-        self.composers = np.genfromtxt('database/' + compo + '.csv',dtype=None, delimiter=splitchar)
-        self.directors = np.genfromtxt('database/' + direct + '.csv', dtype=None, delimiter=splitchar)
-        self.actors = np.genfromtxt('database/' + actor + '.csv', dtype =None, delimiter=splitchar)
-        self.business = np.genfromtxt('database/' + busin + '.csv', dtype='S20', delimiter=splitchar)
+        self.composers = np.genfromtxt('database/' + compo + '.csv',
+                                       dtype=None, delimiter=splitchar)
+        self.directors = np.genfromtxt('database/' + direct + '.csv',
+                                       dtype=None, delimiter=splitchar)
+        self.actors = np.genfromtxt('database/' + actor + '.csv',
+                                    dtype=None, delimiter=splitchar)
+        self.business = np.genfromtxt('database/' + busin + '.csv',
+                                      dtype='S60', delimiter=splitchar)
         self.specials = np.genfromtxt('database/' + special + '.csv',
                                       dtype=None, delimiter=splitchar)
-        self.ratings = np.genfromtxt('database/' + rat + '.csv', dtype='S20', delimiter=splitchar)
+        self.ratings = np.genfromtxt('database/' + rat + '.csv', dtype='S60', delimiter=splitchar)
 
         self.composers = np.char.decode(self.composers)
         self.directors = np.char.decode(self.directors)
@@ -79,10 +83,3 @@ class Moviedata:
     def get_movies(self):
         """ returns a list of all movies in dataset movies """
         return self.ratings[:, 0].tolist()
-
-print(Moviedata('valcomposers',
-                       'valdirectors',
-                       'valactors',
-                       'valbusiness',
-                       'valspecial-effects-companies',
-                       'valratings').movie_composer('The Polar Express'))
