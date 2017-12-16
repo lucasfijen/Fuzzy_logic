@@ -1,6 +1,5 @@
 import json
 import pandas as pd
-import csv
 from random import shuffle
 
 def load_tmdb_movies(path):
