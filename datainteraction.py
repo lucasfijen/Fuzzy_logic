@@ -123,6 +123,10 @@ class Datainteraction:
         budget = self.val.movie_budget(movie)
         return budget / 1000000
 
+    def get_rating(self, movie):
+        """ returns the rating of a movie """
+        return self.val.movie_rating(movie)
+
     def get_all_movies(self):
         """ returns all movies that appear in the validation data """
         return self.val.get_movies()

@@ -79,7 +79,7 @@ class Moviedata:
            """
         ratings = self.ratings[self.ratings[:, 0] == movie, 1]
         if len(ratings) == 0:
-            return 0
+            return -1
         return max(ratings.astype(float))
 
     def get_movies(self):
