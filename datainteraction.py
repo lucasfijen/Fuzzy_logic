@@ -26,102 +26,137 @@ class Datainteraction:
                                  'ratings')
         self.errorvalue = -1
 
-    def actor_values(self, movie):
+    def actor_values(self, movie, ranging=0):
         """ returns average amount of movies starred by the actors,
             and the average ratings of these movies """
         actors = self.val.movie_actor(movie)
-        amount = 0
-        rating = 0
-        length = len(actors)
+        results = []
         for actor in actors:
             movies = self.train.actor_movie(actor)
             if len(movies) == 0:
-                length -= 1
                 continue
-            amount += len(movies)
             avgrating = 0
-            for mov in movies:
-                avgrating += self.train.movie_rating(mov)
-            rating += avgrating / len(movies)
-        if length == 0:
-            return 0, self.errorvalue
-        amount /= length
-        rating /= length
+            amount = 0
+            for movie in movies:
+                temprate = self.train.movie_rating(movie)
+                if temprate >= 1:
+                    avgrating += temprate
+                    amount += 1
+            if amount > 0:
+                results.append((avgrating / amount, amount))
+
+        if len(results) == 0:
+            return self.errorvalue, self.errorvalue
+        if ranging == 0 or ranging > len(results):
+            ranging = len(results)
+        amounts = [i[1] for i in results]
+        amounts.sort(reverse=True)
+        ratings = [i[0] for i in results]
+        ratings.sort(reverse=True)
+        rating = sum(ratings[:ranging]) / ranging
+        amount = sum(amounts[:ranging]) / ranging
         return rating, amount
 
-    def special_values(self, movie):
+    def special_values(self, movie, ranging=0):
         """ returns average amount of movies done by special effect studio,
             and the average ratings of these movies """
         specials = self.val.movie_special(movie)
-        amount = 0
-        rating = 0
-        length = len(specials)
-        for spec in specials:
-            movies = self.train.special_movie(spec)
+        results = []
+        for special in specials:
+            movies = self.train.special_movie(special)
             if len(movies) == 0:
-                length -= 1
                 continue
-            amount += len(movies)
             avgrating = 0
-            for mov in movies:
-                avgrating += self.train.movie_rating(mov)
-            rating += avgrating / len(movies)
-        if length == 0:
-            return 0, self.errorvalue
-        amount /= length
-        rating /= length
+            amount = 0
+            for movie in movies:
+                temprate = self.train.movie_rating(movie)
+                if temprate >= 1:
+                    avgrating += temprate
+                    amount += 1
+            if amount > 0:
+                results.append((avgrating / amount, amount))
+
+        if len(results) == 0:
+            return self.errorvalue, self.errorvalue
+        if ranging == 0 or ranging > len(results):
+            ranging = len(results)
+        amounts = [i[1] for i in results]
+        amounts.sort(reverse=True)
+        ratings = [i[0] for i in results]
+        ratings.sort(reverse=True)
+        rating = sum(ratings[:ranging]) / ranging
+        amount = sum(amounts[:ranging]) / ranging
+
         return rating, amount
 
-    def director_values(self, movie):
+    def director_values(self, movie, ranging=0):
         """ returns average amount of movies created by director
             and the average ratings of these movies """
         directors = self.val.movie_director(movie)
-        amount = 0
-        rating = 0
-        length = len(directors)
-        for direc in directors:
-            movies = self.train.director_movie(direc)
+        results = []
+        for director in directors:
+            movies = self.train.director_movie(director)
             if len(movies) == 0:
-                length -= 1
                 continue
-            amount += len(movies)
             avgrating = 0
-            for mov in movies:
-                avgrating += self.train.movie_rating(mov)
-            rating += avgrating / len(movies)
-        if length == 0:
-            return 0, self.errorvalue
-        amount /= len(directors)
-        rating /= len(directors)
+            amount = 0
+            for movie in movies:
+                temprate = self.train.movie_rating(movie)
+                if temprate >= 1:
+                    avgrating += temprate
+                    amount += 1
+            if amount > 0:
+                results.append((avgrating / amount, amount))
+
+        if len(results) == 0:
+            return self.errorvalue, self.errorvalue
+        if ranging == 0 or ranging > len(results):
+            ranging = len(results)
+        amounts = [i[1] for i in results]
+        amounts.sort(reverse=True)
+        ratings = [i[0] for i in results]
+        ratings.sort(reverse=True)
+        rating = sum(ratings[:ranging]) / ranging
+        amount = sum(amounts[:ranging]) / ranging
+
         return rating, amount
 
-    def composer_values(self, movie):
+    def composer_values(self, movie, ranging=0):
         """ returns average amount of movies with music created by composer
             and the average ratings of these movies """
         composers = self.val.movie_composer(movie)
-        amount = 0
-        rating = 0
-        length = len(composers)
-        for compos in composers:
-            movies = self.train.composer_movie(compos)
+        results = []
+        for composer in composers:
+            movies = self.train.composer_movie(composer)
             if len(movies) == 0:
-                length -= 1
                 continue
-            amount += len(movies)
             avgrating = 0
-            for mov in movies:
-                avgrating += self.train.movie_rating(mov)
-            rating += avgrating / len(movies)
-        if length == 0:
-            return 0, self.errorvalue
-        amount /= len(composers)
-        rating /= len(composers)
+            amount = 0
+            for movie in movies:
+                temprate = self.train.movie_rating(movie)
+                if temprate >= 1:
+                    avgrating += temprate
+                    amount += 1
+            if amount > 0:
+                results.append((avgrating / amount, amount))
+
+        if len(results) == 0:
+            return self.errorvalue, self.errorvalue
+        if ranging == 0 or ranging > len(results):
+            ranging = len(results)
+        amounts = [i[1] for i in results]
+        amounts.sort(reverse=True)
+        ratings = [i[0] for i in results]
+        ratings.sort(reverse=True)
+        rating = sum(ratings[:ranging]) / ranging
+        amount = sum(amounts[:ranging]) / ranging
+
         return rating, amount
 
     def get_budget(self, movie):
         """ returns budget of a movie in milions"""
         budget = self.val.movie_budget(movie)
-        return budget / 1000000
+        return budget
 
     def get_rating(self, movie):
         """ returns the rating of a movie """
@@ -132,4 +167,5 @@ class Datainteraction:
         return self.val.get_movies()
 
 #datainter = Datainteraction()
-#print(datainter.director_values('Harry(2018)'))
+#print(datainter.special_values('Avengers: Age of Ultron', ranging=3))
+#print(datainter.get_budget('Avengers: Age of Ultron'))

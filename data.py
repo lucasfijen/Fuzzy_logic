@@ -71,7 +71,7 @@ class Moviedata:
         budgets = self.business[self.business[:, 0] == movie, 1]
         if len(budgets) == 0:
             return -1
-        return max(budgets.astype(int))
+        return max(budgets.astype(int)) / 1000000
 
     def movie_rating(self, movie):
         """returns rating of a movie, just to be sure, it can handle multiple
@@ -79,7 +79,7 @@ class Moviedata:
            """
         ratings = self.ratings[self.ratings[:, 0] == movie, 1]
         if len(ratings) == 0:
-            return -1
+            return 0
         return max(ratings.astype(float))
 
     def get_movies(self):
